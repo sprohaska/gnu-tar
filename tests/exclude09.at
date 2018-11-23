@@ -40,7 +40,7 @@ AT_KEYWORDS([exclude exclude-tag listed incremental exclude09])
 AT_TAR_CHECK([
 AT_SORT_PREREQ
 mkexcltest etest
-tar -c -f etest.tar --exclude-tag=excludeme --listed=snar -v etest | sort
+tar -c -f etest.tar --exclude-tag=excludeme --listed-incremental=snar -v etest | sort
 ],
 [0],
 [etest/

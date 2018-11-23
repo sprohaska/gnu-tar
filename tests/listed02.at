@@ -26,7 +26,7 @@
 #  <20040626230315.163AA1D148@cpc5-cmbg1-6-0-cust208.cmbg.cable.ntl.com>
 #  http://lists.gnu.org/archive/html/bug-tar/2004-06/msg00028.html
 
-AT_SETUP([working --listed])
+AT_SETUP([working --listed-incremental])
 AT_KEYWORDS([listed incremental listed02])
 
 AT_TAR_CHECK([

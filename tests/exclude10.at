@@ -43,13 +43,13 @@ AT_SORT_PREREQ
 mkexcltest etest
 rm etest/subdir/excludeme
 decho "# Level 0"
-tar -c -f etest-0.tar --exclude-tag=excludeme --listed=snar-0 -v etest | sort
+tar -c -f etest-0.tar --exclude-tag=excludeme --listed-incremental=snar-0 -v etest | sort
 touch etest/subdir/excludeme
 touch etest/subdir/otherfile
 
 decho "# Level 1"
 cp snar-0 snar-1
-tar -c -f etest-1.tar --exclude-tag=excludeme --listed=snar-1 -v etest | sort
+tar -c -f etest-1.tar --exclude-tag=excludeme --listed-incremental=snar-1 -v etest | sort
 ],
 [0],
 [# Level 0
