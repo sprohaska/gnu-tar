@@ -2954,6 +2954,12 @@ backup, using @var{snapshot-file} to determine which files to backup.
 With other operations, informs @command{tar} that the archive is in
 incremental format.  @xref{Incremental Dumps}.
 
+@opsummary{listed-incremental-mtime}
+@item --listed-incremental-mtime=@var{snapshot-file}
+
+Like @option{--listed-incremental}, but use only mtime to detect modified
+files, ignoring ctime.
+
 @opsummary{lzip}
 @item --lzip
 
@@ -6663,13 +6669,21 @@ an incremental archive with additional metadata stored in a standalone
 file, called a @dfn{snapshot file}.  The purpose of this file is to help
 determine which files have been changed, added or deleted since the
 last backup, so that the next incremental backup will contain only
-modified files.  The name of the snapshot file is given as an argument
+modified files.  A file is considered modified if either its mtime or is ctime
+is newer.  With @option{--listed-incremental-mtime}, only mtime is used to
+detect modified files.  The name of the snapshot file is given as an argument
 to the option:
 
 @table @option
 @item --listed-incremental=@var{file}
 @itemx -g @var{file}
   Handle incremental backups with snapshot data in @var{file}.
+@end table
+
+@table @option
+@item --listed-incremental-mtime=@var{file}
+  Like @option{--listed-incremental}, but use only mtime to detect modified
+  files, ignoring ctime.
 @end table
 
 To create an incremental backup, you would use
