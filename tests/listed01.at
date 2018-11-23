@@ -24,7 +24,7 @@
 # References: <20040215014223.GA9699@lukas.schuldei.com>
 # http://lists.gnu.org/archive/html/bug-tar/2004-02/msg00011.html
 
-AT_SETUP([--listed for individual files])
+AT_SETUP([--listed-incremental for individual files])
 AT_KEYWORDS([listed incremental listed01])
 
 AT_TAR_CHECK([

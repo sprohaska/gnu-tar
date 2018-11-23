@@ -44,20 +44,44 @@ ls -l structure/file >/dev/null
 # backing it up.
 sleep 1
 
-tar cf archive --listed=list structure
-tar cfv archive --listed=list structure
+tar cf archive --listed-incremental=list structure
+tar cfv archive --listed-incremental=list structure
 echo separator
 # ReiserFS often offsets the timestamps of newly created files
 # 1 second to the past.  Try to compensate for it, until a better
 # solution is found.
 sleep 2
 echo y >structure/file
-tar cfv archive --listed=list structure
+tar cfv archive --listed-incremental=list structure
+
+echo separator2
+sleep 2
+# touch -a also changes ctime but not mtime.
+touch -a structure/file
+tar cfv archive --listed-incremental=list structure
+
+echo separator3
+sleep 2
+touch -a structure/file
+tar cfv archive --listed-incremental-mtime=list structure
+
+echo separator4
+sleep 2
+touch structure/file
+tar cfv archive --listed-incremental-mtime=list structure
 ],
 [0],
 [
 structure/
 separator
+structure/
+structure/file
+separator2
+structure/
+structure/file
+separator3
+structure/
+separator4
 structure/
 structure/file
 ],

@@ -290,6 +290,7 @@ enum
   KEEP_DIRECTORY_SYMLINK_OPTION,
   KEEP_NEWER_FILES_OPTION,
   LEVEL_OPTION,
+  LISTED_INCREMENTAL_MTIME_OPTION,
   LZIP_OPTION,
   LZMA_OPTION,
   LZOP_OPTION,
@@ -430,6 +431,8 @@ static struct argp_option options[] = {
    N_("handle old GNU-format incremental backup"), GRID+1 },
   {"listed-incremental", 'g', N_("FILE"), 0,
    N_("handle new GNU-format incremental backup"), GRID+1 },
+  {"listed-incremental-mtime", LISTED_INCREMENTAL_MTIME_OPTION, N_("FILE"), 0,
+   N_("like --listed-incremental, but use only mtime to detect modified files"), GRID+1 },
   {"level", LEVEL_OPTION, N_("NUMBER"), 0,
    N_("dump level for created listed-incremental archive"), GRID+1 },
   {"ignore-failed-read", IGNORE_FAILED_READ_OPTION, 0, 0,
@@ -1399,9 +1402,11 @@ parse_opt (int key, char *arg, struct argp_state *state)
       break;
 
     case 'g':
+      after_date_option = true;
+      FALLTHROUGH;
+    case LISTED_INCREMENTAL_MTIME_OPTION:
       optloc_save (OC_LISTED_INCREMENTAL, args->loc);
       listed_incremental_option = arg;
-      after_date_option = true;
       FALLTHROUGH;
     case 'G':
       /* We are making an incremental dump (FIXME: are we?); save
